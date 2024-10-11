@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="423" maxWidth="400" minHeight="423" minWidth="400" prefHeight="423.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="425.0" maxWidth="400" minHeight="423" minWidth="400" prefHeight="425.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Sign Up">
          <font>
@@ -41,7 +41,7 @@
             <Insets bottom="50.0" />
          </VBox.margin>
       </HBox>
-      <Label fx:id="status"/>
+      <Label fx:id="status" />
 
    </children>
 </VBox>

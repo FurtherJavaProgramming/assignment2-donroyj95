@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:include source="MenuBar.fxml" />
+    <Label styleClass="header" text="Welcome, Admin!">
+      <font>
+         <Font size="20.0" />
+      </font></Label>
+
+    <TableView fx:id="stockTable">
+        <columns>
+            <TableColumn text="Title" />
+            <TableColumn text="Author" />
+            <TableColumn text="Price" />
+            <TableColumn text="Sold Copies" />
+            <TableColumn text="Remaining Stock" />
+        </columns>
+
+        <VBox.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" />
+        </VBox.margin>
+    </TableView>
+    <VBox>
+        <children>
+            <Button text="Update stock">
+                <VBox.margin>
+                    <Insets bottom="10.0" left="50.0" />
+                </VBox.margin>
+            </Button>
+<!--            <Button text="Back">-->
+<!--                <VBox.margin>-->
+<!--                    <Insets left="50.0" />-->
+<!--                </VBox.margin>-->
+<!--            </Button>-->
+        </children>
+    </VBox>
+<!--    <padding>-->
+<!--        <Insets bottom="60.0" />-->
+<!--    </padding>-->
+
+<!--    <Button onAction="#updateStock" text="Update Stock" />-->
+
+    <VBox.margin>
+        <Insets />
+    </VBox.margin>
+
+    <padding>
+        <Insets bottom="60.0" />
+    </padding>
+</VBox>

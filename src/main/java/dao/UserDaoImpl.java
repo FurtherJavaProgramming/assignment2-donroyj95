@@ -19,9 +19,15 @@ public class UserDaoImpl implements UserDao {
 		try (Connection connection = Database.getConnection();
 				Statement stmt = connection.createStatement();) {
 			String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (username VARCHAR(10) NOT NULL,"
-					+ "password VARCHAR(8) NOT NULL, firstName VARCHAR, lastName VARCHAR, PRIMARY KEY (username))";
+					+ "password VARCHAR NOT NULL, firstName VARCHAR, lastName VARCHAR, isAdmin BOOLEAN, PRIMARY KEY (username))";
+
+			String addAdminUser = "INSERT OR REPLACE INTO "+TABLE_NAME + " Values (\"admin\",\"reading_admin\",\"Admin\",\"Admin\",true) ";
 			stmt.executeUpdate(sql);
-		} 
+			stmt.executeUpdate(addAdminUser);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -46,14 +52,15 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User createUser(String username, String password, String firstName, String lastName) throws SQLException {
-		String sql = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?,?,?)";
+	public User createUser(String username, String password, String firstName, String lastName,Boolean isAdmin) throws SQLException {
+		String sql = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?,?,?,?)";
 		try (Connection connection = Database.getConnection();
 				PreparedStatement stmt = connection.prepareStatement(sql);) {
 			stmt.setString(1, username);
 			stmt.setString(2, password);
 			stmt.setString(3, firstName);
 			stmt.setString(4, lastName);
+			stmt.setBoolean(5, isAdmin);
 
 			stmt.executeUpdate();
 			return new User(username, password);

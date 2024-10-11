@@ -73,7 +73,7 @@ public class SignupController {
 					}
 
 					user = model.getUserDao().createUser(username.getText().toLowerCase(), password.getText(),
-							firstName.getText(), lastName.getText());
+							firstName.getText(), lastName.getText(),false);
 					if (user != null) {
 						status.setText("Created " + user.getUsername());
 						status.setTextFill(Color.GREEN);

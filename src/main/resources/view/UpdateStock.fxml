@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:include source="MenuBar.fxml" />
+    <Label styleClass="header" text="Update Stock">
+      <font>
+         <Font size="20.0" />
+      </font></Label>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Book Title:" />
+        <TextField fx:id="bookTitleField" promptText="Enter book title" />
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <Label text="Stock:       " />
+      <Spinner editable="true" />
+    </HBox>
+
+    <Button onAction="#updateStockAction" text="Update" />
+   <Button mnemonicParsing="false" text="Cancel" />
+
+    <padding>
+        <Insets bottom="60.0" />
+    </padding>
+</VBox>
