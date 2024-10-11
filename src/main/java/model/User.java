@@ -3,6 +3,7 @@ package model;
 public class User {
 	private String username;
 	private String password;
+	private boolean isAdmin;
 
 	public User() {
 	}
@@ -26,5 +27,13 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean admin) {
+		isAdmin = admin;
 	}
 }

@@ -3,12 +3,12 @@ package model;
 public class Book {
     private String bookTitle;
     private String authors;
-    private double price;
+    private float price;
     private int availableCopies;
 
     public Book(){}
 
-    public Book(String bookTitle, String authors, double price, int availableCopies) {
+    public Book(String bookTitle, String authors, float price, int availableCopies) {
         this.bookTitle = bookTitle;
         this.authors = authors;
         this.price = price;
@@ -36,7 +36,7 @@ public class Book {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

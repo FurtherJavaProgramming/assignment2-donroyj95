@@ -65,7 +65,6 @@ public class SignupController {
 				try {
 					Boolean isUserNameExist = model.getUserDao().isUserNameExist(username.getText().toLowerCase());
 
-					System.out.println(isUserNameExist);
 					if(isUserNameExist){
 						status.setText("Username already exists");
 						status.setTextFill(Color.RED);
@@ -77,6 +76,7 @@ public class SignupController {
 					if (user != null) {
 						status.setText("Created " + user.getUsername());
 						status.setTextFill(Color.GREEN);
+
 					} else {
 						status.setText("Cannot create user");
 						status.setTextFill(Color.RED);

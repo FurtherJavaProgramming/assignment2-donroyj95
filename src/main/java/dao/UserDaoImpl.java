@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 			String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (username VARCHAR(10) NOT NULL,"
 					+ "password VARCHAR NOT NULL, firstName VARCHAR, lastName VARCHAR, isAdmin BOOLEAN, PRIMARY KEY (username))";
 
-			String addAdminUser = "INSERT OR REPLACE INTO "+TABLE_NAME + " Values (\"admin\",\"reading_admin\",\"Admin\",\"Admin\",true) ";
+			String addAdminUser = "INSERT OR REPLACE INTO "+TABLE_NAME + " Values (\"admin\",\"admin\",\"Admin\",\"Admin\",true) ";
 			stmt.executeUpdate(sql);
 			stmt.executeUpdate(addAdminUser);
 
@@ -43,6 +43,7 @@ public class UserDaoImpl implements UserDao {
 					User user = new User();
 					user.setUsername(rs.getString("username"));
 					user.setPassword(rs.getString("password"));
+					user.setAdmin(rs.getBoolean("isAdmin"));
 
 					return user;
 				}
