@@ -15,7 +15,7 @@
 <!--<?import com.example.bookstore.model.OrderItem?>-->
 
 <VBox alignment="CENTER" prefHeight="678.0" prefWidth="870.0" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
-    <fx:include source="MenuBar.fxml" />
+    <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
     <Label styleClass="header" text="Export Orders to CSV">
       <font>
          <Font size="20.0" />

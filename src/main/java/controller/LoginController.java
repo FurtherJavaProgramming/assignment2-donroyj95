@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.sun.tools.javac.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -26,15 +27,15 @@ public class LoginController extends MainController{
 	private Button login;
 	@FXML
 	private Button signup;
-
-	
-	public LoginController(Stage stage, Model model) {
-        super(stage,model);
-
-    }
+	private Main main;
 
 
-	
+	public LoginController(Stage primaryStage, Model model) {
+		super(primaryStage,model);
+
+	}
+
+
 	@FXML
 	public void initialize() {		
 		login.setOnAction(event -> {

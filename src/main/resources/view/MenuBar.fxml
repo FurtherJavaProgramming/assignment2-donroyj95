@@ -13,13 +13,13 @@
     <MenuBar prefHeight="25.0" prefWidth="870.0" VBox.vgrow="NEVER">
         <Menu mnemonicParsing="false" text="Profile">
             <items>
-                <MenuItem onAction="#handleOpenAction" text="View my profile" mnemonicParsing="false"/>
-                <MenuItem mnemonicParsing="false" text="Update my profile"/>
+                <MenuItem onAction="#viewUserProfile" text="View my profile" mnemonicParsing="false"/>
+                <MenuItem onAction="#updateUserProfile" mnemonicParsing="false" text="Update my profile"/>
             </items>
         </Menu>
         <Menu mnemonicParsing="false" text="User">
             <items>
-                <MenuItem mnemonicParsing="false" text="Log out"/>
+                <MenuItem onAction="#logout" mnemonicParsing="false" text="Log out"/>
             </items>
         </Menu>
     </MenuBar>

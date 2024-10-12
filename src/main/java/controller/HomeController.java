@@ -13,8 +13,14 @@ public class HomeController extends MainController {
 	private MenuItem viewProfile;
 	@FXML
 	private MenuItem updateProfile;
+	@FXML
+	private MenuBarController menuBarIncludeController;
 	
 	public HomeController(Stage parentStage, Model model) {
 		super(parentStage, model);
+	}
+
+	public void initialize() {
+		menuBarIncludeController.setMenuBarState(super.getModel(),super.getStage(),super.getParentStage());
 	}
 }

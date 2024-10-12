@@ -11,7 +11,7 @@
 
 <VBox prefHeight="450.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <fx:include source="MenuBar.fxml" />
+      <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
 
     <Label alignment="CENTER" prefWidth="869.0" styleClass="header" text="Welcome to The Bookshop UserName!">
          <VBox.margin>

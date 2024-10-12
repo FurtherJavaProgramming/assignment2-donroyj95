@@ -14,6 +14,7 @@ import controller.LoginController;
 
 public class Main extends Application {
 	private Model model;
+	private Stage primaryStage;
 
 	@Override
 	public void init() {
@@ -21,7 +22,13 @@ public class Main extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage){
+		this.primaryStage = primaryStage;
+		showLoginPage();
+	}
+
+
+	public void showLoginPage() {
 		try {
 			model.setup();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
