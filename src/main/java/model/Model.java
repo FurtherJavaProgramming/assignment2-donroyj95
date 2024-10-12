@@ -28,7 +28,7 @@ public class Model {
 	}
 	
 	public User getCurrentUser() {
-		return this.currentUser;
+		return currentUser;
 	}
 	
 	public void setCurrentUser(User user) {

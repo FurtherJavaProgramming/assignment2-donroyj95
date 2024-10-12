@@ -40,16 +40,30 @@ public class AdminHomePageController extends MainController {
     @FXML
     public TableColumn<Book, Integer> copies;
 
+    @FXML
+    public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
+        super.navigateUserProfile();
+    }
+
+    @FXML
+    private MenuBarController menuBarIncludeController;
+
 
     public AdminHomePageController(Stage parentStage, Model model) {
         super(parentStage, model);
     }
+
+//    @FXML
+//    public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
+//        super.navigateUserProfile();
+//    }
 
 
 
     @FXML
     public void initialize() {
 
+        menuBarIncludeController.setMenuBarState(super.getModel(),super.getStage(),super.getParentStage());
 //        TableView<Book> stockTable = new TableView<>();
         ArrayList<Book> books = new ArrayList<>();
         try{
@@ -102,6 +116,8 @@ public class AdminHomePageController extends MainController {
                 System.out.println(e);
             }
         });
+
+
 
     }
 }

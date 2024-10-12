@@ -44,11 +44,15 @@ public class UserDaoImpl implements UserDao {
 					user.setUsername(rs.getString("username"));
 					user.setPassword(rs.getString("password"));
 					user.setAdmin(rs.getBoolean("isAdmin"));
+					user.setFirstName(rs.getString("firstName"));
+					user.setLastName(rs.getString("lastName"));
 
 					return user;
 				}
 				return null;
-			} 
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -78,6 +82,19 @@ public class UserDaoImpl implements UserDao {
 			try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
             }
+		}
+	}
+
+	@Override
+	public void updateUser(User user)throws SQLException{
+		String query = "UPDATE "+TABLE_NAME+" SET firstName = ?, password = ?, lastName = ? WHERE username = ?";
+		try (Connection connection = Database.getConnection();
+		PreparedStatement stmt = connection.prepareStatement(query)) {
+			stmt.setString(1, user.getFirstName());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getLastName());
+			stmt.setString(4, user.getUsername());
+			stmt.executeUpdate();
 		}
 	}
 }

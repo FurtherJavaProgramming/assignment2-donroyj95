@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23">
-    <fx:include source="MenuBar.fxml" />
+<VBox alignment="CENTER" prefHeight="281.0" prefWidth="337.0" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<!--    <fx:include source="MenuBar.fxml" />-->
     <Label styleClass="header" text="User Profile">
       <font>
          <Font size="20.0" />
@@ -16,7 +16,7 @@
 
     <HBox spacing="10">
         <Label text="Username:" />
-        <Label text="johndoe123" />
+        <Label fx:id="userName" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
@@ -24,7 +24,7 @@
 
     <HBox spacing="10">
         <Label text="First Name:" />
-        <Label text="John" />
+        <Label fx:id="firstName" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
@@ -32,23 +32,23 @@
 
     <HBox spacing="10">
         <Label text="Last Name:" />
-        <Label text="Doe" />
+        <Label fx:id="lastName" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
     </HBox>
 
-    <HBox spacing="10">
-        <Label text="Email:" />
-        <Label text="johndoe@example.com" />
-      <VBox.margin>
-         <Insets left="50.0" />
-      </VBox.margin>
-    </HBox>
+<!--    <HBox spacing="10">-->
+<!--        <Label text="Email:" />-->
+<!--        <Label fx:id="email" text="johndoe@example.com" />-->
+<!--      <VBox.margin>-->
+<!--         <Insets left="50.0" />-->
+<!--      </VBox.margin>-->
+<!--    </HBox>-->
 
     <HBox spacing="10">
         <Label text="Total Bought Books:" />
-        <Label text="20" />
+        <Label fx:id="totalBoughtBooks" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
@@ -56,19 +56,19 @@
 
     <HBox spacing="10">
         <Label text="Total Orders:" />
-        <Label text="15" />
+        <Label fx:id="totalOrders" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
     </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <Button mnemonicParsing="false" text="Back">
+         <Button fx:id="back" mnemonicParsing="false" text="Back">
             <HBox.margin>
                <Insets left="50.0" />
             </HBox.margin>
          </Button>
-         <Button mnemonicParsing="false" text="Update">
+         <Button fx:id="updateProfile" mnemonicParsing="false" text="Update">
             <HBox.margin>
                <Insets left="10.0" />
             </HBox.margin>

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,6 +18,10 @@ public class MainController {
     private Stage parentStage;
     @FXML
     private Label promptMessage;
+
+    public MainController() {
+
+    }
 
     public Label getPromptMessage() {
         return promptMessage;
@@ -81,8 +86,10 @@ public class MainController {
                 new AdminHomePageController(this.stage, this.model);
 
         loader.setController(adminHomePageController);
+
         VBox root = null;
         try {
+
             root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -112,7 +119,7 @@ public class MainController {
 
     public void navigateUserHomePage(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HomeView.fxml"));
-        HomeController homeController = new HomeController(this.stage, this.model);
+        HomeController homeController = new HomeController(this.parentStage, this.model);
 
         loader.setController(homeController);
         VBox root = null;
@@ -125,4 +132,41 @@ public class MainController {
         homeController.showStage(root,"Home",0,0);
         this.stage.close();
     }
+
+    public void navigateUserProfile(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserProfile.fxml"));
+        UserProfileController userProfileController =  new UserProfileController(this.stage, this.model);
+        loader.setController(userProfileController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        userProfileController.showStage(root,"UserProfile",0,0);
+//        this.stage.close();
+    }
+
+//    @FXML
+//    public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
+//        this.navigateUserProfile();
+//    }
+
+    public void navigateUpdateUserPage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UpdateUserData.fxml"));
+        UpdateUserController updateUserController =  new UpdateUserController(this.stage, this.model);
+        loader.setController(updateUserController);
+        AnchorPane root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        updateUserController.showStage(root,"Update User Profile",0,0);
+
+    }
+
+
 }

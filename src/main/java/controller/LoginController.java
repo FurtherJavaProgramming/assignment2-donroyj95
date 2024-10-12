@@ -44,6 +44,7 @@ public class LoginController extends MainController{
 					user = super.getModel().getUserDao().getUser(name.getText(), password.getText());
 					if (user != null) {
 						super.getModel().setCurrentUser(user);
+						System.out.println(super.getModel().getCurrentUser().getFirstName());
 						if(user.isAdmin()){
 							super.navigateAdminHomePage();
 
