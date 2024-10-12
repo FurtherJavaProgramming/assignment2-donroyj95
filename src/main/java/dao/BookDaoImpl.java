@@ -5,6 +5,7 @@ import model.Book;
 import model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class BookDaoImpl implements BookDao {
     private final String TABLE_NAME = "books";
@@ -28,30 +29,50 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Book getBook(String title) throws SQLException {
-        return null;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE LOWER(title) = LOWER(?)";
+        System.out.println(sql);
+        try (Connection connection = Database.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql);) {
+            stmt.setString(1, title);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Book(rs.getString("title"),rs.getString("author"),
+                            rs.getFloat("price"),rs.getInt("copies"),
+                            rs.getInt("soldCopies"));
+                }
+                return null;
+            }
+
+        }
     }
 
     @Override
-    public Book[] getAllBooks() throws SQLException {
+    public ArrayList<Book> getAllBooks() throws SQLException {
         String sql = "SELECT * FROM " + TABLE_NAME;
-//        try (Connection connection = Database.getConnection();){
-//            Statement stmt = connection.createStatement();
-//            ResultSet rs = stmt.executeQuery(sql);
-//            Book[] books = new Book[rs.getRow()];
-//
-//            while (rs.next()) {
-//
-//            }
-//        }
-        return new Book[0];
+        ArrayList<Book> books = new ArrayList<>();
+
+        try (Connection connection = Database.getConnection();){
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Book book = new Book(rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getFloat("price"),
+                        rs.getInt("copies"),rs.getInt("soldCopies"));
+                books.add(book);
+            }
+        }
+
+        return books;
     }
 
     @Override
     public boolean isBookAvailable(String title)throws SQLException{
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE title Like ?";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE LOWER(title) = LOWER(?) COLLATE NOCASE";
         try (Connection connection = Database.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql);) {
-            stmt.setString(1, "%"+title.trim()+"%");
+            stmt.setString(1, title.trim().toLowerCase());
 
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next();
@@ -72,11 +93,25 @@ public class BookDaoImpl implements BookDao {
             stmt.setInt(5, 0);
 
             stmt.executeUpdate();
-            return new Book(title,author,price,copies);
+            return new Book(title,author,price,copies,0);
         }
 
     };
 
+
+    @Override
+    public void updateBookStock(Book book){
+        String query = "UPDATE books SET copies = ? WHERE title = ?";
+        try (Connection connection = Database.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);) {
+            stmt.setInt(1, book.getCopies());
+            stmt.setString(2, book.getTitle());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

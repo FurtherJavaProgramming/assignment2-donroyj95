@@ -17,11 +17,11 @@
 
     <TableView fx:id="stockTable">
         <columns>
-            <TableColumn text="Title" />
-            <TableColumn text="Author" />
-            <TableColumn text="Price" />
-            <TableColumn text="Sold Copies" />
-            <TableColumn text="Remaining Stock" />
+            <TableColumn fx:id="title" text="Title" />
+            <TableColumn fx:id="author" text="Author" />
+            <TableColumn fx:id="price" text="Price" />
+            <TableColumn fx:id="soldCopies" text="Sold Copies" />
+            <TableColumn fx:id="copies" text="Remaining Stock" />
         </columns>
 
         <VBox.margin>

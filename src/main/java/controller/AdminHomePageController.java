@@ -1,63 +1,102 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Book;
 import model.Model;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 
-public class AdminHomePageController {
-    private Model model;
-    private Stage stage;
-    private Stage parentStage;
-//    @FXML
-//    private Label message;
+public class AdminHomePageController extends MainController {
     @FXML
-    private TableView stockTable;
+    private TableView<Book> stockTable;
     @FXML
     private Button updateStock;
     @FXML
     private Button addNewBook;
 
+    @FXML
+    public TableColumn<Book, String> title;
+    @FXML
+    public TableColumn<Book, String> author;
+    @FXML
+    public TableColumn<Book, Float> price;
+
+    @FXML
+    public TableColumn<Book, Integer> soldCopies;
+
+    @FXML
+    public TableColumn<Book, Integer> copies;
+
+
     public AdminHomePageController(Stage parentStage, Model model) {
-        this.stage = new Stage();
-        this.parentStage = parentStage;
-        this.model = model;
+        super(parentStage, model);
     }
 
 
-
-    public void showStage(Pane root) {
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Admin Home");
-        stage.show();
-    }
 
     @FXML
     public void initialize() {
+
+//        TableView<Book> stockTable = new TableView<>();
+        ArrayList<Book> books = new ArrayList<>();
+        try{
+            books = super.getModel().getBookDao().getAllBooks();
+            System.out.println(books.size());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        author.setCellValueFactory(new PropertyValueFactory<>("author"));
+        price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        soldCopies.setCellValueFactory(new PropertyValueFactory<>("soldCopies"));
+        copies.setCellValueFactory(new PropertyValueFactory<>("copies"));
+
+        stockTable.setItems(FXCollections.observableArrayList(books));
+
+
         addNewBook.setOnAction(event -> {
             try{
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddBook.fxml"));
-                AddBookController addBookController = new AddBookController(stage, model);
+                FXMLLoader loader = super.Loader("/view/AddBook.fxml");
+                AddBookController addBookController = new AddBookController(super.getStage(), super.getModel());
 
                 loader.setController(addBookController);
                 GridPane root = loader.load();
 
-                addBookController.showStage(root);
-                stage.close();
+                addBookController.showStage(root,"Add New Book",0,0);
+                super.getStage().close();
+
+            }catch (IOException e) {
+                System.out.println(e);
+            }
+        });
+
+
+        updateStock.setOnAction(event -> {
+            try{
+
+                FXMLLoader loader = super.Loader("/view/UpdateStock.fxml");
+                UpdateStockController updateStockController = new UpdateStockController(super.getStage(), super.getModel());
+
+                loader.setController(updateStockController);
+                VBox root = loader.load();
+
+                updateStockController.showStage(root,"Update Stock",0,0);
+                super.getStage().close();
 
             }catch (IOException e) {
                 System.out.println(e);

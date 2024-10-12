@@ -1,12 +1,9 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Book;
@@ -15,10 +12,8 @@ import model.Model;
 import java.sql.SQLException;
 
 
-public class AddBookController {
-    private Model model;
-    private Stage stage;
-    private Stage parentStage;
+public class AddBookController extends MainController {
+
     @FXML
     private TextField titleField;
     @FXML
@@ -28,26 +23,18 @@ public class AddBookController {
     @FXML
     private TextField copiesField;
     @FXML
-    private Button cancel;
+    private Button back;
     @FXML
     private Button addBook;
     @FXML
     private Label errorLabel;
 
     public AddBookController(Stage parentStage, Model model) {
-        this.stage = new Stage();
-        this.parentStage = parentStage;
-        this.model = model;
+        super(parentStage, model);
     }
 
 
-    public void showStage(Pane root) {
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Add New Book");
-        stage.show();
-    }
+
 
     public void initialize() {
         addBook.setOnAction(event -> {
@@ -68,7 +55,7 @@ public class AddBookController {
 
                 Book book;
                 try{
-                    boolean isBookAvailable = model.getBookDao().isBookAvailable(titleField.getText());
+                    boolean isBookAvailable = super.getModel().getBookDao().isBookAvailable(titleField.getText());
                     if(isBookAvailable){
                         errorLabel.setText("Book Title Exist");
                         errorLabel.setTextFill(Color.RED);
@@ -76,7 +63,7 @@ public class AddBookController {
                     }
                     errorLabel.setText("");
 
-                    book = model.getBookDao().addBook(titleField.getText(),
+                    book = super.getModel().getBookDao().addBook(titleField.getText(),
                             authorField.getText(),Integer.parseInt(copiesField.getText()),
                             Float.parseFloat(priceField.getText()));
 
@@ -96,9 +83,8 @@ public class AddBookController {
         });
 
 
-        cancel.setOnAction(event -> {
-            stage.close();
-            parentStage.show();
+        back.setOnAction(event -> {
+            super.navigateAdminHomePage();
         });
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dao.BookDao;
 import dao.BookDaoImpl;
@@ -11,7 +12,7 @@ public class Model {
 	private UserDao userDao;
 	private BookDao bookDao;
 	private User currentUser;
-	private Book[] currentBooks;
+	private ArrayList<Book> currentBooks;
 	
 	public Model() {
 		userDao = new UserDaoImpl();
@@ -38,7 +39,7 @@ public class Model {
 		return bookDao;
 	}
 
-	public Book[] getCurrentBooks() {
+	public ArrayList<Book> getCurrentBooks() {
 		return currentBooks;
 	}
 

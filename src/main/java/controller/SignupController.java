@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import model.Model;
 import model.User;
 
-public class SignupController {
+public class SignupController extends MainController {
 	@FXML
 	private TextField username;
 	@FXML
@@ -29,14 +29,12 @@ public class SignupController {
 	@FXML
 	private Label status;
 	
-	private Stage stage;
-	private Stage parentStage;
-	private Model model;
+//	private Stage stage;
+//	private Stage parentStage;
+//	private Model model;
 	
 	public SignupController(Stage parentStage, Model model) {
-		this.stage = new Stage();
-		this.parentStage = parentStage;
-		this.model = model;
+		super(parentStage, model);
 	}
 
 	@FXML
@@ -63,7 +61,7 @@ public class SignupController {
 
 				User user;
 				try {
-					Boolean isUserNameExist = model.getUserDao().isUserNameExist(username.getText().toLowerCase());
+					Boolean isUserNameExist = super.getModel().getUserDao().isUserNameExist(username.getText().toLowerCase());
 
 					if(isUserNameExist){
 						status.setText("Username already exists");
@@ -71,7 +69,7 @@ public class SignupController {
 						return;
 					}
 
-					user = model.getUserDao().createUser(username.getText().toLowerCase(), password.getText(),
+					user = super.getModel().getUserDao().createUser(username.getText().toLowerCase(), password.getText(),
 							firstName.getText(), lastName.getText(),false);
 					if (user != null) {
 						status.setText("Created " + user.getUsername());
@@ -88,16 +86,16 @@ public class SignupController {
 		});
 
 		close.setOnAction(event -> {
-			stage.close();
-			parentStage.show();
+			super.getStage().close();
+			super.getParentStage().show();
 		});
 	}
 	
-	public void showStage(Pane root) {
-		Scene scene = new Scene(root, 500, 500);
-		stage.setScene(scene);
-		stage.setResizable(false);
-		stage.setTitle("Sign up");
-		stage.show();
-	}
+//	public void showStage(Pane root) {
+//		Scene scene = new Scene(root, 500, 500);
+//		stage.setScene(scene);
+//		stage.setResizable(false);
+//		stage.setTitle("Sign up");
+//		stage.show();
+//	}
 }
