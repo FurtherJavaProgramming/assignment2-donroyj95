@@ -52,8 +52,9 @@ public class BookDaoImpl implements BookDao {
         String sql = "SELECT * FROM " + TABLE_NAME;
         ArrayList<Book> books = new ArrayList<>();
 
-        try (Connection connection = Database.getConnection();){
-            Statement stmt = connection.createStatement();
+        try (Connection connection = Database.getConnection();
+             Statement stmt = connection.createStatement();){
+
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Book book = new Book(rs.getString("title"),
@@ -113,8 +114,24 @@ public class BookDaoImpl implements BookDao {
         }
     }
 
+    @Override
+    public ArrayList<Book> getHighestSellingBooks() throws SQLException{
+        String query = "Select * from "+TABLE_NAME+" ORDER BY soldCopies DESC LIMIT 5";
+        ArrayList<Book> books = new ArrayList<>();
+        try (Connection connection = Database.getConnection();
+             Statement stmt = connection.createStatement();){
 
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Book book = new Book(rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getFloat("price"),
+                        rs.getInt("copies"),rs.getInt("soldCopies"));
+                books.add(book);
+            }
+        }
 
-
+        return books;
+    }
 
 }

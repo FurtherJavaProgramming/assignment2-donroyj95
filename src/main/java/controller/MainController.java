@@ -168,5 +168,25 @@ public class MainController {
 
     }
 
+    public void navigateSelectBookPage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SelectBooks.fxml"));
+        SelectBooksController selectBooksController =  new SelectBooksController(this.stage, this.model);
+        loader.setController(selectBooksController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        selectBooksController.showStage(root,"Select Books",0,0);
+
+    }
+
+    public void backButtonAction(){
+        this.getStage().close();
+        this.getParentStage().show();
+    }
+
 
 }

@@ -14,4 +14,5 @@ public interface BookDao {
     public boolean isBookAvailable(String title)throws SQLException;
 
     void updateBookStock(Book book);
+    ArrayList<Book> getHighestSellingBooks() throws SQLException;
 }

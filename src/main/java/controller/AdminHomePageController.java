@@ -68,7 +68,6 @@ public class AdminHomePageController extends MainController {
         ArrayList<Book> books = new ArrayList<>();
         try{
             books = super.getModel().getBookDao().getAllBooks();
-            System.out.println(books.size());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

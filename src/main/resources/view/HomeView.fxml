@@ -13,7 +13,7 @@
   <children>
       <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
 
-    <Label alignment="CENTER" prefWidth="869.0" styleClass="header" text="Welcome to The Bookshop UserName!">
+    <Label fx:id="welcomeMessage" alignment="CENTER" prefWidth="869.0" styleClass="header" text="Welcome to The Bookshop UserName!">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
@@ -28,28 +28,28 @@
 
     <TableView fx:id="bookTable" prefHeight="300" prefWidth="400">
       <columns>
-        <TableColumn prefWidth="330.40004193782806" text="Title">
+        <TableColumn fx:id="title" prefWidth="330.40004193782806" text="Title">
           <cellValueFactory>
-            <PropertyValueFactory property="bookTitle" />
+            <PropertyValueFactory property="title" />
           </cellValueFactory>
         </TableColumn>
-        <TableColumn minWidth="0.0" prefWidth="295.1999206542969" text="Author">
+        <TableColumn fx:id="author" minWidth="0.0" prefWidth="295.1999206542969" text="Author">
           <cellValueFactory>
-            <PropertyValueFactory property="authors" />
+            <PropertyValueFactory property="author" />
           </cellValueFactory>
         </TableColumn>
-            <TableColumn prefWidth="144.0" text="Sold Copies" />
+            <TableColumn fx:id="soldCopies" prefWidth="144.0" text="Sold Copies" />
       </columns>
          <VBox.margin>
             <Insets left="50.0" right="50.0" top="20.0" />
          </VBox.margin>
     </TableView>
-      <Button mnemonicParsing="false" text="Select Books">
+      <Button fx:id="selectBooks" mnemonicParsing="false" text="Select Books">
          <VBox.margin>
             <Insets left="50.0" top="20.0" />
          </VBox.margin>
       </Button>
-      <Button mnemonicParsing="false" text="View History">
+      <Button fx:id="viewHistory" mnemonicParsing="false" text="View History">
          <VBox.margin>
             <Insets bottom="20.0" left="50.0" top="10.0" />
          </VBox.margin>
