@@ -45,6 +45,11 @@
                     <PropertyValueFactory property="availableCopies" />
                 </cellValueFactory>
             </TableColumn>
+<!--            <TableColumn fx:id="addToCartButton" prefWidth="152.79998779296875" text="Add To Cart Button">-->
+<!--                <cellValueFactory>-->
+<!--                    <PropertyValueFactory property="addToCartButton" />-->
+<!--                </cellValueFactory>-->
+<!--            </TableColumn>-->
 <!--         <TableColumn prefWidth="75.0" text="Action" >-->
 <!--            <cellFactory>-->
 
