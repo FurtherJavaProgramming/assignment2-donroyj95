@@ -41,13 +41,18 @@ public class HomeController extends MainController {
 		super(parentStage, model);
 	}
 
-	public void initialize() throws SQLException {
+	public void initialize() {
 		welcomeMessage.setText("Welcome to The Bookshop "+super.getModel().getCurrentUser().getUsername());
 		menuBarIncludeController.setMenuBarState(super.getModel(),super.getStage(),super.getParentStage());
 
-		ArrayList<Book> books = super.getModel().getBookDao().getHighestSellingBooks();
+        ArrayList<Book> books = null;
+        try {
+            books = super.getModel().getBookDao().getHighestSellingBooks();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-		title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
 		author.setCellValueFactory(new PropertyValueFactory<>("author"));
 		soldCopies.setCellValueFactory(new PropertyValueFactory<>("soldCopies"));
 

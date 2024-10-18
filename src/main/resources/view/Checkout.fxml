@@ -10,8 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23">
-    <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:include fx:id="menuBarInclude" source="MenuBar.fxml" />
 <Label styleClass="header" text="Checkout" GridPane.columnIndex="0" GridPane.columnSpan="1">
       <font>
          <Font size="20.0" />
@@ -23,7 +23,7 @@
 
 
 
-    <Label text="Total Price: $50" GridPane.columnIndex="0" GridPane.columnSpan="2" />
+    <Label fx:id="totalPriceLabel" GridPane.columnIndex="0" GridPane.columnSpan="2" />
 
     <Label text="Card Number:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <TextField fx:id="cardNumberField" promptText="Enter card number (16 digits)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -34,13 +34,15 @@
     <Label text="CVV:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
     <TextField fx:id="cvvField" promptText="Enter CVV (3 digits)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-    <Button onAction="#processPayment" text="Proceed to Payment" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-    <Button onAction="#processPayment" text="Back" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+    <Button fx:id="proceedPayment" text="Proceed Payment" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+    <Button fx:id="back" text="Back" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+      <Label fx:id="promptMessage" prefHeight="18.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />
       </columnConstraints>
       <rowConstraints>
+         <RowConstraints />
          <RowConstraints />
          <RowConstraints />
          <RowConstraints />

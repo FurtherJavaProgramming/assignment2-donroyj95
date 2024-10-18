@@ -9,9 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<?import javafx.event.EventHandler?>
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" >
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
 
     <fx:include fx:id="menuBarInclude" source="MenuBar.fxml" />
 
@@ -67,8 +65,13 @@
             <Insets left="50.0" right="50.0" top="20.0" />
         </VBox.margin>
     </TableView>
+   <Label fx:id="promptMessage" alignment="CENTER" prefHeight="18.0" prefWidth="869.0">
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin>
+   </Label>
 
-    <Button mnemonicParsing="false" text="Add to Shopping Cart">
+    <Button fx:id="addToCart" mnemonicParsing="false" text="Add to Shopping Cart">
         <VBox.margin>
             <Insets left="50.0" top="25.0" />
         </VBox.margin>

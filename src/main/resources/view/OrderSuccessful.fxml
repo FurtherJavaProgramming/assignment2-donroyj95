@@ -37,7 +37,7 @@
       </VBox.margin>
     </HBox>
 
-    <Button onAction="#continueShoppingAction" text="Continue Shopping">
+    <Button fx:id="continueShopping" text="Continue Shopping">
       <VBox.margin>
          <Insets bottom="50.0" />
       </VBox.margin></Button>

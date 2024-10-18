@@ -10,31 +10,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Book;
-import model.BooksWithButton;
 import model.Model;
-import util.ButtonCell;
+import util.TableTextField;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 public class SelectBooksController extends MainController{
 
     @FXML
     private Button backButton;
+    @FXML
+    private Button addToCart;
+
 
     @FXML
-    private TableView<BooksWithButton> selectBooksTable;
+    private TableView<Book> selectBooksTable;
 
     @FXML
-    private TableColumn<BooksWithButton, String> title;
+    private TableColumn<Book, String> title;
     @FXML
-    private TableColumn<BooksWithButton, String> author;
+    private TableColumn<Book, String> author;
     @FXML
-    private TableColumn<BooksWithButton, Integer> copies;
+    private TableColumn<Book, Integer> copies;
     @FXML
-    private TableColumn<BooksWithButton, Float> price;
-//    @FXML
-//    private TableColumn<BooksWithButton, String> addToCartButton;
+    private TableColumn<Book, Float> price;
 
 
     public SelectBooksController(Stage parentStage, Model model) {
@@ -43,39 +45,50 @@ public class SelectBooksController extends MainController{
 
 
 
-    public void initialize() throws SQLException {
+    public void initialize() {
         backButton.setOnAction(event -> {
+            super.getModel().getShoppingCart().setBookDictionary(new Hashtable<>());
             super.backButtonAction();
         });
 
-        TableColumn<BooksWithButton, Void> actionCol = new TableColumn<>("Action");
-
-        actionCol.setCellFactory(new Callback<TableColumn<BooksWithButton, Void>,
-                TableCell<BooksWithButton, Void>>() {
-            @Override
-            public TableCell<BooksWithButton, Void> call(TableColumn<BooksWithButton, Void> param) {
-                return new ButtonCell();
-            }
+        addToCart.setOnAction(event -> {
+            super.getStage().close();
+            super.navigateShoppingCartPage();
         });
+
+        TableColumn<Book, Void> actionCol = getEnterBookCopiesTableColumn();
 
         selectBooksTable.getColumns().add(actionCol);
 
 
-        ArrayList<Book> books = super.getModel().getBookDao().getAllBooks();
-        ArrayList<BooksWithButton> booksWithButtons = new ArrayList<BooksWithButton>();
-
-        for (Book book : books) {
-            booksWithButtons.add(new BooksWithButton(book));
+        ArrayList<Book> books = null;
+        try {
+            books = super.getModel().getBookDao().getAllBooks();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         author.setCellValueFactory(new PropertyValueFactory<>("author"));
         copies.setCellValueFactory(new PropertyValueFactory<>("copies"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        actionCol.setCellValueFactory(new PropertyValueFactory<>("addToCartButton"));
 
-        selectBooksTable.setItems(FXCollections.observableArrayList(booksWithButtons));
+        selectBooksTable.setItems(FXCollections.observableArrayList(books));
 
+    }
+
+    private TableColumn<Book, Void> getEnterBookCopiesTableColumn() {
+        TableColumn<Book, Void> enterBookCopies = new TableColumn<>("Enter Book Copies");
+
+        enterBookCopies.setCellFactory(new Callback<TableColumn<Book, Void>,
+                TableCell<Book, Void>>() {
+            @Override
+            public TableCell<Book, Void> call(TableColumn<Book, Void> param) {
+                return new TableTextField(SelectBooksController.super.getStage(),SelectBooksController.super.getModel(),
+                        SelectBooksController.super.getPromptMessage());
+            }
+        });
+        return enterBookCopies;
     }
 }
 

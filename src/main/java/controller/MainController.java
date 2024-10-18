@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
 
@@ -23,12 +24,16 @@ public class MainController {
 
     }
 
+//    public void initialize() {
+//    }
+
     public Label getPromptMessage() {
         return promptMessage;
     }
 
     public void setPromptMessage(String promptMessage) {
         this.promptMessage.setText(promptMessage);
+
     }
 
     public MainController(Stage parentStage, Model model){
@@ -183,9 +188,61 @@ public class MainController {
 
     }
 
+    public void navigateShoppingCartPage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ShoppingCart.fxml"));
+        ShoppingCartController shoppingCartController =  new ShoppingCartController(this.stage, this.model);
+        loader.setController(shoppingCartController);
+        AnchorPane root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        shoppingCartController.showStage(root,"Update User Profile",0,0);
+
+    }
+    public void navigateCheckoutPage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Checkout.fxml"));
+        CheckoutController checkoutController =  new CheckoutController(this.stage, this.model);
+        loader.setController(checkoutController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        checkoutController.showStage(root,"Checkout",0,0);
+
+    }
+
+    public void navigateOrderSuccessfulPage(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderSuccessful.fxml"));
+        OrderSuccessfulController orderSuccessfulController =  new OrderSuccessfulController(this.stage, this.model);
+        loader.setController(orderSuccessfulController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        orderSuccessfulController.showStage(root,"Checkout",0,0);
+    }
+
     public void backButtonAction(){
         this.getStage().close();
         this.getParentStage().show();
+    }
+
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

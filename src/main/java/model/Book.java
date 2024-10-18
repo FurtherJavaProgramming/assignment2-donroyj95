@@ -7,9 +7,7 @@ public class Book {
     private int copies = 0;
     private int soldCopies = 0;
 
-    public Book(String title) {
-        this.title = title;
-    }
+
 
     public int getSoldCopies() {
         return soldCopies;

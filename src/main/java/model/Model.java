@@ -12,11 +12,13 @@ public class Model {
 	private UserDao userDao;
 	private BookDao bookDao;
 	private User currentUser;
+	private ShoppingCart shoppingCart;
 	private ArrayList<Book> currentBooks;
 	
 	public Model() {
 		userDao = new UserDaoImpl();
 		bookDao = new BookDaoImpl();
+		shoppingCart = new ShoppingCart();
 	}
 	
 	public void setup() throws SQLException {
@@ -33,6 +35,7 @@ public class Model {
 	
 	public void setCurrentUser(User user) {
 		currentUser = user;
+		shoppingCart.setUser(currentUser);
 	}
 
 	public BookDao getBookDao() {
@@ -43,4 +46,11 @@ public class Model {
 		return currentBooks;
 	}
 
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
+	}
 }

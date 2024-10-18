@@ -13,23 +13,25 @@
 <AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="20.0" prefHeight="27.0" prefWidth="870.0" text="Shopping Cart" textAlignment="CENTER" AnchorPane.bottomAnchor="442.40000000000003" AnchorPane.topAnchor="30.0">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="20.0" prefHeight="27.0"
+               prefWidth="870.0" text="Shopping Cart" textAlignment="CENTER" AnchorPane.bottomAnchor="442.40000000000003"
+               AnchorPane.topAnchor="30.0">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
 
-        <TableView layoutX="50.0" layoutY="69.0" prefHeight="250.0" prefWidth="500.0">
+        <TableView fx:id="shoppingCart" layoutX="50.0" layoutY="69.0" prefHeight="250.0" prefWidth="500.0">
             <columns>
-            <TableColumn prefWidth="75.0" text="Select" />
-                <TableColumn text="Book Title">
+<!--            <TableColumn prefWidth="75.0" text="Select" />-->
+                <TableColumn fx:id="title" text="Book Title">
                     <cellValueFactory>
                         <PropertyValueFactory property="bookTitle" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Quantity">
+                <TableColumn fx:id="copies" text="Copies">
                     <cellValueFactory>
-                        <PropertyValueFactory property="quantity" />
+                        <PropertyValueFactory property="copies" />
                     </cellValueFactory>
                 </TableColumn>
                 <!-- we can add more columns as needed -->
@@ -42,10 +44,9 @@
                 <Label fx:id="totalPriceLabel" />
             </HBox>
 
-            <Button text="Continue Shopping" />
-            <Button text="Remove Selected Item" />
-            <Button text="Clear Cart" />
-            <Button text="Proceed to Checkout" />
+            <Button fx:id="updateCart" text="Update Shopping Cart" />
+            <Button fx:id="checkout" text="Proceed to Checkout" />
+            <Button fx:id="cancel" text="Cancel" />
         </VBox>
     </children>
 </AnchorPane>
