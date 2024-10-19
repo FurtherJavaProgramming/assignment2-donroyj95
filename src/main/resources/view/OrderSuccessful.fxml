@@ -23,7 +23,7 @@
 
     <HBox spacing="10">
         <Label text="Order Number:" />
-        <Label text="123456789" />
+        <Label fx:id="orderId" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>

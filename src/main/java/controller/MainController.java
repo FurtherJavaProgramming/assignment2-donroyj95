@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
+import model.Order;
 
 import java.io.IOException;
 
@@ -217,9 +218,9 @@ public class MainController {
 
     }
 
-    public void navigateOrderSuccessfulPage(){
+    public void navigateOrderSuccessfulPage(Order order){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OrderSuccessful.fxml"));
-        OrderSuccessfulController orderSuccessfulController =  new OrderSuccessfulController(this.stage, this.model);
+        OrderSuccessfulController orderSuccessfulController =  new OrderSuccessfulController(this.stage, this.model,order);
         loader.setController(orderSuccessfulController);
         VBox root = null;
         try {

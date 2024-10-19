@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
+import model.Order;
+
+import java.sql.Date;
+import java.sql.SQLException;
 
 public class CheckoutController extends  MainController{
     @FXML
@@ -33,6 +37,7 @@ public class CheckoutController extends  MainController{
 
 
         proceedPayment.setOnAction(event -> {
+
             if(cardNumberField.getText().isEmpty() || cardNumberField.getText().length() != 5 || !isInteger(cardNumberField.getText())){
                 super.setPromptMessage("Please enter a valid card number");
                 super.getPromptMessage().setTextFill(Color.RED);
@@ -51,9 +56,20 @@ public class CheckoutController extends  MainController{
                 return;
             }
 
+            try {
+                this.getModel().getBookDao().updateSoldCopies(this.getModel().getShoppingCart().getShoppingCartBooks());
+                Order order = this.getModel().getOrderDao().addOrder(this.getModel().getCurrentUser().getUsername(),
+                        this.getModel().getShoppingCart().getTotalPrice());
+                this.getModel().getBookOrderDao().addBooksOrder(order.getId(),
+                        this.getModel().getShoppingCart().getShoppingCartBooks());
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
             super.setPromptMessage("");
             super.getStage().close();
-            super.navigateOrderSuccessfulPage();
+            super.navigateOrderSuccessfulPage(order);
 
         });
 
