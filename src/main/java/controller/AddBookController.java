@@ -23,6 +23,8 @@ public class AddBookController extends MainController {
     @FXML
     private TextField copiesField;
     @FXML
+    private TextField soldCopies;
+    @FXML
     private Button back;
     @FXML
     private Button addBook;
@@ -53,6 +55,12 @@ public class AddBookController extends MainController {
                     return;
                 }
 
+                if(!soldCopies.getText().matches("\\b0*[1-9]\\d*\\b")){
+                    errorLabel.setText("Please enter a valid sold copies");
+                    errorLabel.setTextFill(Color.RED);
+                    return;
+                }
+
                 Book book;
                 try{
                     boolean isBookAvailable = super.getModel().getBookDao().isBookAvailable(titleField.getText());
@@ -65,6 +73,7 @@ public class AddBookController extends MainController {
 
                     book = super.getModel().getBookDao().addBook(titleField.getText(),
                             authorField.getText(),Integer.parseInt(copiesField.getText()),
+                            Integer.parseInt(soldCopies.getText()),
                             Float.parseFloat(priceField.getText()));
 
 
@@ -74,6 +83,7 @@ public class AddBookController extends MainController {
                     authorField.clear();
                     copiesField.clear();
                     priceField.clear();
+                    soldCopies.clear();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

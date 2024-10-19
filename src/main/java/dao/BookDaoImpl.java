@@ -2,6 +2,7 @@ package dao;
 
 
 import model.Book;
+import model.ShoppingCartBook;
 import model.User;
 
 import java.sql.*;
@@ -83,7 +84,7 @@ public class BookDaoImpl implements BookDao {
 
 
     @Override
-    public Book addBook(String title, String author,Integer copies, Float price) throws SQLException {
+    public Book addBook(String title, String author,Integer copies, Integer soldCopies, Float price) throws SQLException {
         String sql = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?,?,?,?)";
         try (Connection connection = Database.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql);) {
@@ -91,10 +92,10 @@ public class BookDaoImpl implements BookDao {
             stmt.setString(2, author);
             stmt.setInt(3, copies);
             stmt.setFloat(4, price);
-            stmt.setInt(5, 0);
+            stmt.setInt(5, soldCopies);
 
             stmt.executeUpdate();
-            return new Book(title,author,price,copies,0);
+            return new Book(title,author,price,copies,soldCopies);
         }
 
     };
@@ -132,6 +133,37 @@ public class BookDaoImpl implements BookDao {
         }
 
         return books;
+    }
+
+    @Override
+    public void updateBookCopies(Book book)throws SQLException{
+        String query = "UPDATE books SET soldCopies = ?, copies = ? WHERE title = ?";
+        try (Connection connection = Database.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);) {
+            stmt.setInt(1, book.getSoldCopies());
+            stmt.setInt(2, book.getCopies());
+            stmt.setString(3, book.getTitle());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    @Override
+    public void updateSoldCopies(ArrayList<ShoppingCartBook> shoppingCartBooks) throws SQLException{
+        for(ShoppingCartBook shoppingCartBook: shoppingCartBooks){
+            Book book = getBook(shoppingCartBook.getTitle());
+            if(book.getCopies()>=shoppingCartBook.getBuyingCopies()){
+                book.setSoldCopies(book.getSoldCopies() + shoppingCartBook.getBuyingCopies());
+                book.setCopies(book.getCopies() - shoppingCartBook.getBuyingCopies());
+                updateBookCopies(book);
+            }else{
+                throw new SQLException("Remaining copies less than buying copies");
+            }
+
+        }
     }
 
 }
