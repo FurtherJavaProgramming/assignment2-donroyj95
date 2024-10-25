@@ -38,7 +38,9 @@ public class Model {
 	
 	public void setCurrentUser(User user) {
 		currentUser = user;
-		shoppingCart.setUser(currentUser);
+		if(currentUser != null) {
+			shoppingCart.setUser(currentUser);
+		}
 	}
 
 	public BookDao getBookDao() {

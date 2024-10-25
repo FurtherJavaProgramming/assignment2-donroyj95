@@ -1,19 +1,19 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Order {
     private int id;
     private String username;
-    private Date orderDate;
+    private LocalDateTime orderDate;
     private float totalPrice;
 
 
-    public Order(int orderId, String username, LocalDate currentDate, float totalPrice) {
+    public Order(int orderId, String username, LocalDateTime currentDate, float totalPrice) {
         this.id = orderId;
         this.username = username;
-        this.orderDate = new Date(currentDate.toEpochDay());
+        this.orderDate = currentDate;
         this.totalPrice = totalPrice;
     }
 
@@ -33,11 +33,11 @@ public class Order {
         this.username = username;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 

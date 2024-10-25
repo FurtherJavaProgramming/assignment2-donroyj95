@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10" styleClass="order-success" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23">
-    <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
+<VBox alignment="CENTER" prefHeight="233.0" prefWidth="474.0" spacing="10" styleClass="order-success" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:include fx:id="menuBarInclude" source="MenuBar.fxml" />
     <Label styleClass="header" text="Order Successful">
       <font>
          <Font size="20.0" />
@@ -22,23 +22,21 @@
     </HBox>
 
     <HBox spacing="10">
-        <Label text="Order Number:" />
+        <Label text="Order Id:" />
         <Label fx:id="orderId" />
       <VBox.margin>
          <Insets left="50.0" />
       </VBox.margin>
     </HBox>
-
-    <HBox spacing="10">
-        <Label text="Estimated Delivery Date:" />
-        <Label text="October 10, 2024" />
-      <VBox.margin>
-         <Insets left="50.0" />
-      </VBox.margin>
-    </HBox>
-
-    <Button fx:id="continueShopping" text="Continue Shopping">
-      <VBox.margin>
-         <Insets bottom="50.0" />
-      </VBox.margin></Button>
+   <HBox prefHeight="100.0" prefWidth="200.0">
+      <children>
+      
+          <Button fx:id="continueShopping" text="Continue Shopping" textAlignment="CENTER">
+            <HBox.margin>
+               <Insets left="50.0" right="10.0" />
+            </HBox.margin>
+         </Button>
+         <Button fx:id="exit" mnemonicParsing="false" text="Exit" />
+      </children>
+   </HBox>
 </VBox>

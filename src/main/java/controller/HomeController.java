@@ -26,6 +26,8 @@ public class HomeController extends MainController {
 
 	@FXML
 	private Button selectBooks;
+	@FXML
+	private Button viewHistory;
 
 	@FXML
 	private TableView<Book> bookTable;
@@ -61,6 +63,11 @@ public class HomeController extends MainController {
 		selectBooks.setOnAction(event -> {
 			super.navigateSelectBookPage();
 			super.getStage().close();
+		});
+
+		viewHistory.setOnAction(event -> {
+			super.getStage().close();
+			super.navigateViewAllOrders();
 		});
 
 	}

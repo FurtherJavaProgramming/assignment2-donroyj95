@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,6 +14,7 @@ import model.Model;
 import model.Order;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainController {
     private Model model;
@@ -21,12 +23,7 @@ public class MainController {
     @FXML
     private Label promptMessage;
 
-    public MainController() {
-
-    }
-
-//    public void initialize() {
-//    }
+    public MainController() {}
 
     public Label getPromptMessage() {
         return promptMessage;
@@ -244,6 +241,48 @@ public class MainController {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public void logout() {
+        this.model.setCurrentUser(null);
+        this.model.setShoppingCart(null);
+        this.stage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+
+        // Customize controller instance
+        Model newModel = new Model();
+        try {
+            newModel.setup();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        LoginController loginController = new LoginController(new Stage(), newModel);
+
+        loader.setController(loginController);
+
+        GridPane root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        loginController.showStage(root,"Welcome",500,300);
+
+    }
+
+    public void navigateViewAllOrders(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewAllOrders.fxml"));
+        ViewAllOrdersController viewAllOrdersController =  new ViewAllOrdersController(this.stage, this.model);
+        loader.setController(viewAllOrdersController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        viewAllOrdersController.showStage(root,"All Orders",0,0);
     }
 
 

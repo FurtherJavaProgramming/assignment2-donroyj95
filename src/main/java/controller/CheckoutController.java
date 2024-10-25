@@ -33,10 +33,12 @@ public class CheckoutController extends  MainController{
     public void initialize() {
         String regex = "^(0[1-9]|1[0-2])/(19|20)\\d{2}$";
 
+
         totalPriceLabel.setText("Total Price: "+this.getModel().getShoppingCart().getTotalPrice());
 
 
         proceedPayment.setOnAction(event -> {
+            Order order;
 
             if(cardNumberField.getText().isEmpty() || cardNumberField.getText().length() != 5 || !isInteger(cardNumberField.getText())){
                 super.setPromptMessage("Please enter a valid card number");
@@ -58,7 +60,7 @@ public class CheckoutController extends  MainController{
 
             try {
                 this.getModel().getBookDao().updateSoldCopies(this.getModel().getShoppingCart().getShoppingCartBooks());
-                Order order = this.getModel().getOrderDao().addOrder(this.getModel().getCurrentUser().getUsername(),
+                order = this.getModel().getOrderDao().addOrder(this.getModel().getCurrentUser().getUsername(),
                         this.getModel().getShoppingCart().getTotalPrice());
                 this.getModel().getBookOrderDao().addBooksOrder(order.getId(),
                         this.getModel().getShoppingCart().getShoppingCartBooks());

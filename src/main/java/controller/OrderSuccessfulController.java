@@ -13,18 +13,28 @@ public class OrderSuccessfulController extends MainController{
     @FXML
     private Button continueShopping;
     @FXML
+    private Button exit;
+    @FXML
     private Label orderId;
+
+    private Order order;
 
 
     public OrderSuccessfulController(Stage parentStage, Model model, Order order) {
         super(parentStage, model);
-        this.orderId.setText(String.valueOf(order.getId()));
+        this.order = order;
     }
 
     public void initialize() {
+        this.orderId.setText(String.valueOf(order.getId()));
         continueShopping.setOnAction(event -> {
             super.getStage().close();
             super.navigateSelectBookPage();
         });
+
+        exit.setOnAction(event -> {
+            super.logout();
+        });
+
     }
 }

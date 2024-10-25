@@ -14,31 +14,30 @@
 <!--<?import com.example.bookstore.model.OrderItem?>-->
 
 <VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
-    <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
-    <Label styleClass="header" text="View All Orders">
+    <fx:include fx:id="menuBarInclude" source="MenuBar.fxml" />
+    <Label styleClass="header" text="All Orders">
       <font>
          <Font size="20.0" />
       </font></Label>
 
     <TableView fx:id="orderTable" prefHeight="400" prefWidth="600">
         <columns>
-         <TableColumn prefWidth="75.0" text="Select" />
-            <TableColumn text="Order Number">
+            <TableColumn fx:id="orderId" prefWidth="148.0000228881836" text="Order Id">
                 <cellValueFactory>
-                    <PropertyValueFactory property="orderNumber" />
+                    <PropertyValueFactory property="orderId" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Date and Time Placed">
+            <TableColumn fx:id="dateTime" prefWidth="150.4000244140625" text="Date and Time">
                 <cellValueFactory>
-                    <PropertyValueFactory property="dateTimePlaced" />
+                    <PropertyValueFactory property="dateTime" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Total Price">
+            <TableColumn fx:id="totalPrice" minWidth="0.0" prefWidth="115.199951171875" text="Total Price">
                 <cellValueFactory>
                     <PropertyValueFactory property="totalPrice" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="144.79998779296875" text="Books Purchased">
+            <TableColumn fx:id="booksAndCopies" prefWidth="199.20004272460938" text="Books \&amp; Copies Purchased">
                 <cellValueFactory>
                     <PropertyValueFactory property="orderItems" />
                 </cellValueFactory>
