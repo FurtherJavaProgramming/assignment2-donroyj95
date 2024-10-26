@@ -1,12 +1,11 @@
 package dao;
 
 import model.BookOrder;
+import model.OrderView;
 import model.ShoppingCartBook;
+import model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BookOrderDaoImpl implements BookOrderDao {
@@ -50,6 +49,37 @@ public class BookOrderDaoImpl implements BookOrderDao {
 
         for (ShoppingCartBook shoppingCartBook : shoppingCartBooks) {
             addBookOrder(orderId,shoppingCartBook.getTitle(),shoppingCartBook.getBuyingCopies());
+        }
+    }
+
+
+    @Override
+    public ArrayList<OrderView> getBooksOrdersByUsername(String username) throws SQLException{
+
+        String query = "SELECT O.id AS orderId,O.orderDate AS dateAndTime,O.totalPrice," +
+                " GROUP_CONCAT(B.bookTitle || ' (' || B.bookCopies || ' copies' || ')\n') AS booksAndCopies " +
+                "FROM orders O " +
+                "JOIN book_order B ON O.id = B.orderId " +
+                "WHERE O.username = ? "+
+                " GROUP BY " +
+                " O.id, O.orderDate, O.totalPrice";
+        try (Connection connection = Database.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);) {
+            stmt.setString(1, username);
+            ArrayList<OrderView> orderViews = new ArrayList<>();
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    OrderView orderView = new OrderView(rs.getInt("orderId"),
+                            rs.getString("dateAndTime"),
+                            rs.getFloat("totalPrice"),rs.getString("booksAndCopies"));
+                    orderViews.add(orderView);
+                }
+                return orderViews;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }
