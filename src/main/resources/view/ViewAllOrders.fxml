@@ -53,8 +53,8 @@
     </TableView>
 
     <HBox alignment="CENTER" spacing="10">
-        <Button text="Back" />
-        <Button text="Export to CSV" />
+        <Button fx:id="back" text="Back" />
+        <Button fx:id="exportToCsv" text="Export to CSV" />
     </HBox>
     <padding>
         <Insets bottom="60.0" />

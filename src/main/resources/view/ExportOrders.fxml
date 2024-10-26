@@ -3,10 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -14,53 +11,36 @@
 <!--<?import com.example.bookstore.model.Order?>-->
 <!--<?import com.example.bookstore.model.OrderItem?>-->
 
-<VBox alignment="CENTER" prefHeight="678.0" prefWidth="870.0" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
-    <fx:include source="MenuBar.fxml"  fx:id="menuBarInclude"/>
+<VBox alignment="CENTER" prefHeight="298.0" prefWidth="518.0" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <fx:include fx:id="menuBarInclude" source="MenuBar.fxml" />
     <Label styleClass="header" text="Export Orders to CSV">
       <font>
          <Font size="20.0" />
       </font></Label>
 
-    <TableView fx:id="orderTable" prefHeight="400" prefWidth="600">
-        <columns>
-            <TableColumn text="Select">
-                <cellValueFactory>
-                    <PropertyValueFactory property="selected" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Order Number">
-                <cellValueFactory>
-                    <PropertyValueFactory property="orderNumber" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Date and Time Placed">
-                <cellValueFactory>
-                    <PropertyValueFactory property="dateTimePlaced" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Total Price">
-                <cellValueFactory>
-                    <PropertyValueFactory property="totalPrice" />
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn text="Books Purchased">
-                <cellValueFactory>
-                    <PropertyValueFactory property="orderItems" />
-                </cellValueFactory>
-            </TableColumn>
-        </columns>
-      <VBox.margin>
-         <Insets left="50.0" right="50.0" />
-      </VBox.margin>
-    </TableView>
-
     <HBox alignment="CENTER" spacing="10" />
-   <VBox prefHeight="145.0" prefWidth="820.0" spacing="10.0">
+   <VBox alignment="CENTER_LEFT" prefHeight="146.0" prefWidth="614.0" spacing="10.0">
       <children>
-           <TextField fx:id="destinationField" maxWidth="200.0" promptText="Destination Folder" />
            <TextField fx:id="fileNameField" maxWidth="200.0" promptText="File Name" />
-           <Button text="Export Selected Orders" />
-           <Button text="Cancel" />
+         <HBox prefHeight="14.0" prefWidth="820.0">
+            <children>
+                 <TextField fx:id="destinationField" maxWidth="200.0" promptText="Destination Folder">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </TextField>
+               <Button fx:id="browse" mnemonicParsing="false" text="Browse">
+                  <HBox.margin>
+                     <Insets left="10.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+            <VBox.margin>
+               <Insets bottom="5.0" />
+            </VBox.margin>
+         </HBox>
+           <Button fx:id="exportOrders" text="Export Selected Orders" />
+           <Button fx:id="back" text="Back" />
       </children>
       <VBox.margin>
          <Insets left="50.0" />
