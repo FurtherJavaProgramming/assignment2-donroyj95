@@ -289,18 +289,6 @@ public class MainController {
 
 
 
-    public void navigateExportOrders(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ExportOrders.fxml"));
-        ExportOrdersController exportOrdersController =  new ExportOrdersController(this.stage, this.model);
-        loader.setController(exportOrdersController);
-        VBox root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        exportOrdersController.showStage(root,"Export Selected Orders",0,0);
-    }
 
 }
