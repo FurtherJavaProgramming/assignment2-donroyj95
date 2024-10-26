@@ -55,7 +55,19 @@ public class OrderView {
         this.booksAndCopies = booksAndCopies;
     }
 
-    public BooleanProperty selectedProperty() {
+//    public BooleanProperty selectedProperty() {
+//        return isSelected;
+//    }
+
+    public boolean isSelected() {
+        return isSelected.get();
+    }
+
+    public BooleanProperty isSelectedProperty() {
         return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected.set(isSelected);
     }
 }

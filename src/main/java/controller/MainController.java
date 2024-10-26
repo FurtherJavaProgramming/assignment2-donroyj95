@@ -12,9 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
 import model.Order;
+import model.OrderView;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MainController {
     private Model model;
@@ -285,5 +287,20 @@ public class MainController {
         viewAllOrdersController.showStage(root,"All Orders",0,0);
     }
 
+
+
+    public void navigateExportOrders(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ExportOrders.fxml"));
+        ExportOrdersController exportOrdersController =  new ExportOrdersController(this.stage, this.model);
+        loader.setController(exportOrdersController);
+        VBox root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        exportOrdersController.showStage(root,"Export Selected Orders",0,0);
+    }
 
 }

@@ -13,6 +13,7 @@ public class Model {
 	private User currentUser;
 	private ShoppingCart shoppingCart;
 	private ArrayList<Book> currentBooks;
+	private ArrayList<OrderView> selectedOrdersToExport;
 	
 	public Model() {
 		userDao = new UserDaoImpl();
@@ -85,5 +86,13 @@ public class Model {
 
 	public void setCurrentBooks(ArrayList<Book> currentBooks) {
 		this.currentBooks = currentBooks;
+	}
+
+	public ArrayList<OrderView> getSelectedOrdersToExport() {
+		return selectedOrdersToExport;
+	}
+
+	public void setSelectedOrdersToExport(ArrayList<OrderView> selectedOrdersToExport) {
+		this.selectedOrdersToExport = selectedOrdersToExport;
 	}
 }

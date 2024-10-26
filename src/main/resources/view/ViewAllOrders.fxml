@@ -51,6 +51,7 @@
          <Cursor fx:constant="DEFAULT" />
       </cursor>
     </TableView>
+   <Label fx:id="promptMessage" alignment="CENTER" prefHeight="18.0" prefWidth="381.0" />
 
     <HBox alignment="CENTER" spacing="10">
         <Button fx:id="back" text="Back" />

@@ -2,10 +2,12 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
 import model.OrderView;
@@ -27,12 +29,19 @@ public class ViewAllOrdersController extends MainController{
     @FXML
     public TableColumn<OrderView, String> booksAndCopies;
 
+    @FXML
+    public Button exportToCsv;
+    @FXML
+    public Button back;
+
+    private ArrayList<OrderView> orderViews = new ArrayList<>();
+
     public ViewAllOrdersController(Stage parentStage, Model model) {
         super(parentStage, model);
     }
 
     public void initialize() {
-        ArrayList<OrderView> orderViews = new ArrayList<>();
+
         try {
             System.out.println(this.getModel().getCurrentUser().getUsername());
             orderViews = this.getModel().getBookOrderDao().getBooksOrdersByUsername(
@@ -42,7 +51,7 @@ public class ViewAllOrdersController extends MainController{
             throw new RuntimeException(e);
         }
         TableColumn<OrderView, Boolean> selectColumn = new TableColumn<>("Select");
-        selectColumn.setCellValueFactory(cellData -> cellData.getValue().selectedProperty());
+        selectColumn.setCellValueFactory(cellData -> cellData.getValue().isSelectedProperty());
         selectColumn.setCellFactory(CheckBoxTableCell.forTableColumn(selectColumn));
         viewAllOrdersTable.getColumns().addFirst(selectColumn);
 
@@ -52,6 +61,31 @@ public class ViewAllOrdersController extends MainController{
         booksAndCopies.setCellValueFactory(new PropertyValueFactory<>("booksAndCopies"));
 
         viewAllOrdersTable.setItems(FXCollections.observableArrayList(orderViews));
+
+        back.setOnAction(event -> {
+            super.getStage().close();
+            super.getParentStage().show();
+        });
+
+        exportToCsv.setOnAction(event -> {
+            ArrayList<OrderView> selectedOrders = new ArrayList<>();
+            for(OrderView orderView :orderViews){
+                if(orderView.isSelected()){
+                    selectedOrders.add(orderView);
+                }
+            }
+
+            if(selectedOrders.isEmpty()) {
+                super.setPromptMessage("Please select an order");
+                super.getPromptMessage().setTextFill(Color.RED);
+                return;
+            }
+            super.setPromptMessage("");
+
+            super.getModel().setSelectedOrdersToExport(selectedOrders);
+            super.getStage().close();
+            super.navigateExportOrders();
+        });
 
     }
 
