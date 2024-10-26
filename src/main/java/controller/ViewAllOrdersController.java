@@ -95,13 +95,15 @@ public class ViewAllOrdersController extends MainController{
 
             File selectedFile = fileChooser.showSaveDialog(super.getStage());
 
+            if(selectedFile == null){ return;}
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile))) {
                 // Write sample data to the CSV file
                 writer.write("Order Id, Date & Time, Total Price, Book & Copies\n");
                 for(OrderView orderView: selectedOrders){
                     writer.write(orderView.getOrderId()+","+orderView.getDateTime()+
                             ","+orderView.getTotalPrice()+","+orderView.getBooksAndCopies()
-                            .replace(",", "").replace("\n"," | ")+"\n");
+                            .replace(",", " | ").replace("\n","")+"\n");
                 }
 
                 super.setPromptMessage("Data exported to: " + selectedFile.getAbsolutePath());

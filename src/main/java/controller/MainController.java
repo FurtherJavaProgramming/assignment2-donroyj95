@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MainController {
+public class MainController  {
     private Model model;
     private Stage stage;
     private Stage parentStage;
@@ -252,7 +252,7 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
 
         // Customize controller instance
-        Model newModel = new Model();
+        Model newModel = Model.getInstance();
         try {
             newModel.setup();
         } catch (SQLException e) {

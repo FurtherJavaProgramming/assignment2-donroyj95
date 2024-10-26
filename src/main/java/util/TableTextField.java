@@ -18,9 +18,6 @@ public class TableTextField extends TableCell<Book, Void> {
     private Stage stage;
     private Stage parentStage;
     private Label errorMessage;
-//    private ShoppingCart cart = new ShoppingCart();
-    //    private final Button addToCartButton = new Button("Add to Cart");
-//    private Dictionary<Book, Integer> bookDict= new Hashtable<>();
     private TextField buyingCopies = new TextField();
 
     public TableTextField(Stage parentStage, Model model, Label errorMessage) {
@@ -74,64 +71,5 @@ public class TableTextField extends TableCell<Book, Void> {
             setGraphic(buyingCopies);
         }
     }
-//@Override
-//protected void updateItem(Void item, boolean empty) {
-//    super.updateItem(item, empty);
-//
-//    if (empty || item == null) {
-//        setGraphic(null);
-//        setText(null);
-//    } else {
-//        Book book = getTableView().getItems().get(getIndex());
-//
-//        if (isEditing()) {
-//            setText(null);
-//            setGraphic(buyingCopies);
-//        } else {
-//            if (book != null) {
-//                Integer copies = this.model.getShoppingCart().getBookDictionary().get(book);
-//                if (copies == null) {
-//                    buyingCopies.setText("0");
-//                } else {
-//                    buyingCopies.setText(copies.toString());
-//                }
-//                setGraphic(buyingCopies);
-//                setText(null);
-//            } else {
-//                setGraphic(null);
-//                setText(null);
-//            }
-//        }
-//    }
-//}
-
-//    @Override
-//    protected void updateItem(Void item, boolean empty) {
-//        super.updateItem(item, empty);
-//
-//        if (empty || item == null) {
-//            setGraphic(null);
-//            setText(null);
-//        } else {
-//            Book book = getTableView().getItems().get(getIndex());
-//
-//            if (isEditing()) {
-//                setText(null);
-//                setGraphic(buyingCopies);
-//            } else {
-//                Integer copies = this.model.getShoppingCart().getBookDictionary().get(book);
-//                if (copies == null) {
-//                    buyingCopies.setText("0");
-//                } else {
-//                    buyingCopies.setText(copies.toString());
-//                }
-//                setGraphic(buyingCopies);
-//                setText(null); // Make sure the text of the cell is empty
-//            }
-//        }
-//    }
-
-
-
 }
 

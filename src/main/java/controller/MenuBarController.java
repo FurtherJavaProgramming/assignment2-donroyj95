@@ -65,7 +65,7 @@ public class MenuBarController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
 
         // Customize controller instance
-        Model newModel = new Model();
+        Model newModel = Model.getInstance();
         newModel.setup();
         LoginController loginController = new LoginController(new Stage(), newModel);
 

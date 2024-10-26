@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import dao.*;
 
 public class Model {
+	private static Model instance;
 	private UserDao userDao;
 	private BookDao bookDao;
 	private OrderDao orderDao;
@@ -13,14 +14,20 @@ public class Model {
 	private User currentUser;
 	private ShoppingCart shoppingCart;
 	private ArrayList<Book> currentBooks;
-	private ArrayList<OrderView> selectedOrdersToExport;
-	
-	public Model() {
+
+	private Model() {
 		userDao = new UserDaoImpl();
 		bookDao = new BookDaoImpl();
 		orderDao = new OrderDaoImpl();
 		bookOrderDao = new BookOrderDaoImpl();
 		shoppingCart = new ShoppingCart();
+	}
+
+	public static Model getInstance() {
+		if (instance == null) {
+			instance = new Model();
+		}
+		return instance;
 	}
 	
 	public void setup() throws SQLException {
@@ -86,13 +93,5 @@ public class Model {
 
 	public void setCurrentBooks(ArrayList<Book> currentBooks) {
 		this.currentBooks = currentBooks;
-	}
-
-	public ArrayList<OrderView> getSelectedOrdersToExport() {
-		return selectedOrdersToExport;
-	}
-
-	public void setSelectedOrdersToExport(ArrayList<OrderView> selectedOrdersToExport) {
-		this.selectedOrdersToExport = selectedOrdersToExport;
 	}
 }
