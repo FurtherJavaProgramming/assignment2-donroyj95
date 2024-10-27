@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
 import model.Order;
+import model.ShoppingCart;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -237,7 +238,7 @@ public class MainController  {
 
     public void logout() {
         this.model.setCurrentUser(null);
-        this.model.setShoppingCart(null);
+        this.model.setShoppingCart(new ShoppingCart());
         this.stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
 

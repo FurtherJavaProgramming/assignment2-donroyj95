@@ -35,9 +35,6 @@ public class AddBookController extends MainController {
         super(parentStage, model);
     }
 
-
-
-
     public void initialize() {
         addBook.setOnAction(event -> {
             if (!isTextFieldEmpty(authorField) &&!isTextFieldEmpty(priceField) &&

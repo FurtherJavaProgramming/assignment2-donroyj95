@@ -39,7 +39,7 @@ public class CheckoutController extends  MainController{
         proceedPayment.setOnAction(event -> {
             Order order;
 
-            if(isTextFieldEmpty(cardNumberField) || cardNumberField.getText().length() != 16 || !isInteger(cardNumberField.getText())){
+            if(isTextFieldEmpty(cardNumberField) || cardNumberField.getText().length() != 16 || !isNumeric(cardNumberField.getText())){
                 super.setPromptMessage("Please enter a valid card number");
                 super.getPromptMessage().setTextFill(Color.RED);
                 return;

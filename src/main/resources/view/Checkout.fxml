@@ -36,7 +36,7 @@
 
     <Button fx:id="proceedPayment" text="Proceed Payment" GridPane.columnSpan="2" GridPane.rowIndex="5" />
     <Button fx:id="back" text="Back" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-      <Label fx:id="promptMessage" prefHeight="18.0" prefWidth="148.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label fx:id="promptMessage" alignment="CENTER" prefHeight="18.0" prefWidth="314.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <columnConstraints>
          <ColumnConstraints />
          <ColumnConstraints />

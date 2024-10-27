@@ -7,6 +7,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Book;
@@ -51,6 +52,12 @@ public class SelectBooksController extends MainController{
         });
 
         addToCart.setOnAction(event -> {
+            if(super.getModel().getShoppingCart().getBookDictionary().isEmpty()){
+                super.setPromptMessage("Please add at least one book to the shopping cart");
+                super.getPromptMessage().setTextFill(Color.RED);
+                return;
+            }
+            super.setPromptMessage("");
             super.getStage().close();
             super.navigateShoppingCartPage();
         });

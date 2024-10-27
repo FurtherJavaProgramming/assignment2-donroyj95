@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Model;
 import model.Order;
+import model.ShoppingCart;
 
 
 public class OrderSuccessfulController extends MainController{
@@ -28,6 +29,7 @@ public class OrderSuccessfulController extends MainController{
     public void initialize() {
         this.orderId.setText(String.valueOf(order.getId()));
         continueShopping.setOnAction(event -> {
+            super.getModel().setShoppingCart(new ShoppingCart());
             super.getStage().close();
             super.navigateSelectBookPage();
         });

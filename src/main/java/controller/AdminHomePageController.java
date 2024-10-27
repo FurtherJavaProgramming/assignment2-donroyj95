@@ -104,8 +104,5 @@ public class AdminHomePageController extends MainController {
                 System.out.println(e);
             }
         });
-
-
-
     }
 }
