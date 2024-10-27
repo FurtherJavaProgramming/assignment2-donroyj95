@@ -2,14 +2,12 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Book;
 import model.Model;
 
-import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 
 public class UpdateStockController extends MainController{
@@ -23,28 +21,12 @@ public class UpdateStockController extends MainController{
     @FXML
     private TextField stockField;
 
-
-
-//    @FXML
-//    private void handleNumericInput(KeyEvent event) {
-//        if (!isNumeric(event.getText())) {
-//            event.consume(); // Prevents non-numeric input
-//        }
-//    }
-
-    private boolean isNumeric(String str) {
-        return str.matches("-?\\d+") || str.isEmpty();
-    }
-
     public UpdateStockController(Stage parentStage, Model model) {
         super(parentStage, model);
     }
 
     @FXML
     public void initialize() {
-
-
-
         updateStock.setOnAction(e -> {
             String bookTitle = bookTitleField.getText();
             String newStock = stockField.getText();

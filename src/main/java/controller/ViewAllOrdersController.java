@@ -48,10 +48,8 @@ public class ViewAllOrdersController extends MainController{
     public void initialize() {
 
         try {
-            System.out.println(this.getModel().getCurrentUser().getUsername());
             orderViews = this.getModel().getBookOrderDao().getBooksOrdersByUsername(
                     this.getModel().getCurrentUser().getUsername());
-            System.out.println(orderViews.get(0).getOrderId());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -18,15 +18,15 @@ import model.User;
 
 public class LoginController extends MainController{
 	@FXML
-	private TextField name;
+    public TextField name;
 	@FXML
-	private PasswordField password;
+    public PasswordField password;
 	@FXML
-	private Label message;
+    public Label message;
 	@FXML
-	private Button login;
+    public Button login;
 	@FXML
-	private Button signup;
+    public Button signup;
 	private Main main;
 
 
@@ -39,13 +39,12 @@ public class LoginController extends MainController{
 	@FXML
 	public void initialize() {		
 		login.setOnAction(event -> {
-			if (!name.getText().isEmpty() && !password.getText().isEmpty()) {
+			if (!isTextFieldEmpty(name) && !isTextFieldEmpty(password)) {
 				User user;
 				try {
 					user = super.getModel().getUserDao().getUser(name.getText(), password.getText());
 					if (user != null) {
 						super.getModel().setCurrentUser(user);
-						System.out.println(super.getModel().getCurrentUser().getFirstName());
 						if(user.isAdmin()){
 							super.navigateAdminHomePage();
 
@@ -55,17 +54,14 @@ public class LoginController extends MainController{
 
 						
 					} else {
-						message.setText("Wrong username or password");
-						message.setTextFill(Color.RED);
+						displayErrorMessage(message,"Wrong username or password");
 					}
 				} catch (SQLException e) {
-					message.setText(e.getMessage());
-					message.setTextFill(Color.RED);
+					displayErrorMessage(message,e.getMessage());
 				}
 				
 			} else {
-				message.setText("Empty username or password");
-				message.setTextFill(Color.RED);
+				displayErrorMessage(message,"Empty username or password");
 			}
 			name.clear();
 			password.clear();
@@ -76,7 +72,6 @@ public class LoginController extends MainController{
 				message.setText("");
 				name.clear();
 				password.clear();
-//				super.getStage().close();
 			});
 	}
 }

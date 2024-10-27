@@ -7,7 +7,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static java.sql.JDBCType.DATE;
 
 public class OrderDaoImpl implements OrderDao{
     private final String TABLE_NAME = "orders";
@@ -31,7 +30,6 @@ public class OrderDaoImpl implements OrderDao{
     public Order addOrder(String username, float totalPrice) throws SQLException {
         String sql = "INSERT INTO " + TABLE_NAME + " (username, orderDate, totalPrice) VALUES (?, ?, ?)";
         LocalDateTime currentDateTime = LocalDateTime.now();;
-//        Date date = new Date(currentDate.toEpochDay());
         try (Connection connection = Database.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql);) {
             stmt.setString(1, username);

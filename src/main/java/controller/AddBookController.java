@@ -40,24 +40,21 @@ public class AddBookController extends MainController {
 
     public void initialize() {
         addBook.setOnAction(event -> {
-            if (!authorField.getText().isEmpty() &&!priceField.getText().isEmpty() &&
-                    !copiesField.getText().isEmpty()&& !titleField.getText().isEmpty()) {
+            if (!isTextFieldEmpty(authorField) &&!isTextFieldEmpty(priceField) &&
+                    !isTextFieldEmpty(copiesField)&& !isTextFieldEmpty(titleField)) {
 
-                if(!priceField.getText().matches("\\b(?:0|[1-9]\\d*)(?:\\.\\d+)?\\b")){
-                    errorLabel.setText("Please enter a valid price");
-                    errorLabel.setTextFill(Color.RED);
+                if(!isTextFieldMatches(priceField,"\\b(?:0|[1-9]\\d*)(?:\\.\\d+)?\\b")){
+                    displayErrorMessage(errorLabel,"Please enter a valid price");
                     return;
                 }
 
-                if(!copiesField.getText().matches("\\b0*[1-9]\\d*\\b")){
-                    errorLabel.setText("Please enter a valid copies");
-                    errorLabel.setTextFill(Color.RED);
+                if(!isTextFieldMatches(copiesField,"\\b0*[1-9]\\d*\\b")){
+                    displayErrorMessage(errorLabel,"Please enter a valid copies");
                     return;
                 }
 
-                if(!soldCopies.getText().matches("\\b0*[1-9]\\d*\\b")){
-                    errorLabel.setText("Please enter a valid sold copies");
-                    errorLabel.setTextFill(Color.RED);
+                if(!isTextFieldMatches(soldCopies,"\\b0*[1-9]\\d*\\b")){
+                    displayErrorMessage(errorLabel,"Please enter a valid sold copies");
                     return;
                 }
 
@@ -65,8 +62,7 @@ public class AddBookController extends MainController {
                 try{
                     boolean isBookAvailable = super.getModel().getBookDao().isBookAvailable(titleField.getText());
                     if(isBookAvailable){
-                        errorLabel.setText("Book Title Exist");
-                        errorLabel.setTextFill(Color.RED);
+                        displayErrorMessage(errorLabel,"Book Title Exist");
                         return;
                     }
                     errorLabel.setText("");

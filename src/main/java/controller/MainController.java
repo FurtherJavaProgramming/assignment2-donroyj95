@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -12,11 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
 import model.Order;
-import model.OrderView;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class MainController  {
     private Model model;
@@ -150,13 +152,8 @@ public class MainController  {
         }
 
         userProfileController.showStage(root,"UserProfile",0,0);
-//        this.stage.close();
     }
 
-//    @FXML
-//    public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
-//        this.navigateUserProfile();
-//    }
 
     public void navigateUpdateUserPage(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UpdateUserData.fxml"));
@@ -236,14 +233,7 @@ public class MainController  {
         this.getParentStage().show();
     }
 
-    public static boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
+
 
     public void logout() {
         this.model.setCurrentUser(null);
@@ -287,8 +277,46 @@ public class MainController  {
         viewAllOrdersController.showStage(root,"All Orders",0,0);
     }
 
+    public static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    public static boolean isTextFieldEmpty(TextField textField){
+        return textField.getText().isEmpty();
+    }
 
+    public static boolean isTextFieldMatches(TextField textField, String regex){
+        return textField.getText().matches(regex);
+    }
 
+    public static boolean isFutureDate(String expiryDate) {
+        // Get the current month and year
+        YearMonth currentYearMonth = YearMonth.now();
 
+        try {
+            // Parse the expiry date string
+            YearMonth expiryYearMonth = YearMonth.parse(expiryDate, DateTimeFormatter.ofPattern("MM/yyyy"));
+
+            // Compare with the current date
+            return expiryYearMonth.isAfter(currentYearMonth);
+        } catch (DateTimeParseException e) {
+            // Handle parsing exceptions
+            System.out.println("Invalid date format: " + expiryDate);
+            return false;
+        }
+    }
+
+    public static void displayErrorMessage(Label label,String errorMessage){
+        label.setText(errorMessage);
+        label.setTextFill(Color.RED);
+    }
+
+    public static boolean isNumeric(String str) {
+        return str.matches("-?\\d+") || str.isEmpty();
+    }
 
 }

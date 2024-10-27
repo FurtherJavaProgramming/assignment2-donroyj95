@@ -1,14 +1,11 @@
 package controller;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Book;
@@ -53,18 +50,10 @@ public class AdminHomePageController extends MainController {
         super(parentStage, model);
     }
 
-//    @FXML
-//    public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
-//        super.navigateUserProfile();
-//    }
-
-
-
     @FXML
     public void initialize() {
 
         menuBarIncludeController.setMenuBarState(super.getModel(),super.getStage(),super.getParentStage());
-//        TableView<Book> stockTable = new TableView<>();
         ArrayList<Book> books = new ArrayList<>();
         try{
             books = super.getModel().getBookDao().getAllBooks();

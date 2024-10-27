@@ -27,7 +27,6 @@ public class TableTextField extends TableCell<Book, Void> {
         this.stage = new Stage();
 
         buyingCopies.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(buyingCopies.getText()+"1");
             Book book = getTableView().getItems().get(getIndex());
             this.model.getShoppingCart().getBookDictionary().remove(book);
 
@@ -58,7 +57,6 @@ public class TableTextField extends TableCell<Book, Void> {
     @Override
     protected void updateItem(Void item, boolean empty) {
         super.updateItem(item, empty);
-        System.out.println(item + " "+empty+" "+getIndex());
 
         if (empty) {
             setGraphic(null);

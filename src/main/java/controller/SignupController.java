@@ -3,11 +3,9 @@ package controller;
 import java.sql.SQLException;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Model;
@@ -29,30 +27,28 @@ public class SignupController extends MainController {
 	@FXML
 	private Label status;
 	
-//	private Stage stage;
-//	private Stage parentStage;
-//	private Model model;
-	
 	public SignupController(Stage parentStage, Model model) {
 		super(parentStage, model);
 	}
 
+
+
 	@FXML
 	public void initialize() {
 		createUser.setOnAction(event -> {
-			if(username.getText().isEmpty()){
+			if(isTextFieldEmpty(username)){
 				status.setText("Empty username");
 				status.setTextFill(Color.RED);
 				return;
-			}else if(firstName.getText().isEmpty()){
+			}else if(isTextFieldEmpty(firstName)){
 				status.setText("Empty first name");
 				status.setTextFill(Color.RED);
 				return;
-			}else if(lastName.getText().isEmpty()){
+			}else if(isTextFieldEmpty(lastName)){
 				status.setText("Empty last name");
 				status.setTextFill(Color.RED);
 				return;
-			}else if(password.getText().isEmpty()){
+			}else if(isTextFieldEmpty(password)){
 				status.setText("Empty password");
 				status.setTextFill(Color.RED);
 				return;
@@ -90,12 +86,4 @@ public class SignupController extends MainController {
 			super.getParentStage().show();
 		});
 	}
-	
-//	public void showStage(Pane root) {
-//		Scene scene = new Scene(root, 500, 500);
-//		stage.setScene(scene);
-//		stage.setResizable(false);
-//		stage.setTitle("Sign up");
-//		stage.show();
-//	}
 }

@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import model.Model;
 import model.Order;
 
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class CheckoutController extends  MainController{
@@ -40,19 +39,19 @@ public class CheckoutController extends  MainController{
         proceedPayment.setOnAction(event -> {
             Order order;
 
-            if(cardNumberField.getText().isEmpty() || cardNumberField.getText().length() != 5 || !isInteger(cardNumberField.getText())){
+            if(isTextFieldEmpty(cardNumberField) || cardNumberField.getText().length() != 16 || !isInteger(cardNumberField.getText())){
                 super.setPromptMessage("Please enter a valid card number");
                 super.getPromptMessage().setTextFill(Color.RED);
                 return;
             }
 
-            if(expiryDateField.getText().isEmpty() || ! expiryDateField.getText().matches(regex)){
+            if(isTextFieldEmpty(expiryDateField) || !isTextFieldMatches(expiryDateField,regex) ||!isFutureDate(expiryDateField.getText())){
                 super.setPromptMessage("Please enter a valid expiry date");
                 super.getPromptMessage().setTextFill(Color.RED);
                 return;
             }
 
-            if(cvvField.getText().isEmpty() || cvvField.getText().length() != 3){
+            if(isTextFieldEmpty(cvvField) || cvvField.getText().length() != 3){
                 super.setPromptMessage("Please enter a valid cvv");
                 super.getPromptMessage().setTextFill(Color.RED);
                 return;

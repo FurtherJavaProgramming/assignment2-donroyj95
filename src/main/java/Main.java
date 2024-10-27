@@ -13,6 +13,7 @@ import model.Model;
 import controller.LoginController;
 
 public class Main extends Application {
+
 	private Model model;
 	private Stage primaryStage;
 

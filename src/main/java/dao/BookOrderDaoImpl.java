@@ -6,6 +6,7 @@ import model.ShoppingCartBook;
 import model.User;
 
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BookOrderDaoImpl implements BookOrderDao {
@@ -67,6 +68,10 @@ public class BookOrderDaoImpl implements BookOrderDao {
              PreparedStatement stmt = connection.prepareStatement(query);) {
             stmt.setString(1, username);
             ArrayList<OrderView> orderViews = new ArrayList<>();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
